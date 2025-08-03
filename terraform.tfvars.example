@@ -1,0 +1,117 @@
+# ========================================
+# TERRAFORM.TFVARS.EXAMPLE - CONFIGURATION TEMPLATE
+# ========================================
+# 
+# PURPOSE:
+# This file serves as a template for creating your actual terraform.tfvars
+# configuration file. It provides safe example values and clear instructions
+# for customizing the infrastructure deployment.
+# 
+# WHAT THIS FILE CONTAINS:
+# - Example AWS region configuration
+# - Sample AMI ID (placeholder - must be updated)
+# - Complete environment configurations for prod/dev/test
+# - Example tagging strategy for resource management
+# - Detailed usage instructions and best practices
+# 
+# HOW TO USE:
+# 1. Copy this file to terraform.tfvars
+# 2. Update aws_region to your preferred region
+# 3. Replace ami_id with valid AMI for your region
+# 4. Customize instance counts and types as needed
+# 5. Update default_tags with your information
+# 6. Run terraform init, plan, and apply
+# 
+# SECURITY FEATURES:
+# - No actual sensitive data (safe to share/commit)
+# - Placeholder AMI IDs to prevent accidental deployment
+# - Clear instructions for secure configuration
+# - Example values demonstrate proper format
+# 
+# CUSTOMIZATION OPTIONS:
+# - Adjust instance counts per environment
+# - Add/remove instance types
+# - Modify naming prefixes
+# - Add additional environments
+# - Customize tagging strategy
+# 
+# TERRAFORM CONCEPTS DEMONSTRATED:
+# - Variable value assignment
+# - Complex data structures (maps of objects)
+# - Environment-specific configuration
+# - Resource tagging best practices
+# - Infrastructure configuration management
+# ========================================
+
+# ========================================
+# TERRAFORM.TFVARS.EXAMPLE
+# 100 EC2 Instances - Environment Distribution
+# Copy this to terraform.tfvars and modify for your setup
+# ========================================
+
+# AWS Configuration
+# Change to your preferred region
+aws_region = "<aws_region>"
+
+# AMI Configuration
+# Ubuntu 20.04 LTS - UPDATE THIS FOR YOUR REGION
+# Find latest AMI: aws ec2 describe-images --owners 099720109477 --filters "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
+ami_id = "ami-xxxxxxxxxxxxxxxxx"
+
+# ========================================
+# ENVIRONMENT CONFIGURATIONS
+# Customize counts and instance types for your needs
+# ========================================
+
+environment_configs = {
+  # Production Environment - 40 instances
+  # Higher performance instances for production workloads
+  prod = {
+    count           = 40
+    prefix          = "Prod-Server"
+    instance_types  = ["t3.medium", "t3.large"]
+    environment_tag = "production"
+  }
+
+  # Development Environment - 35 instances
+  # Balanced cost vs performance for development work
+  dev = {
+    count           = 35
+    prefix          = "Dev-Server"
+    instance_types  = ["t2.micro", "t2.small"]
+    environment_tag = "development"
+  }
+
+  # Testing Environment - 25 instances
+  # Cost-optimized instances for testing scenarios
+  test = {
+    count           = 25
+    prefix          = "Test-Server"
+    instance_types  = ["t2.micro"]
+    environment_tag = "testing"
+  }
+}
+
+# ========================================
+# DEFAULT TAGS
+# Applied to all instances for management and cost tracking
+# ========================================
+
+default_tags = {
+  Owner       = "YourTeamName"
+  Environment = "multi-env"
+  Terraform   = "true"
+}
+
+# ========================================
+# USAGE INSTRUCTIONS:
+# ========================================
+# 1. Copy this file to terraform.tfvars
+# 2. Update aws_region to your preferred region
+# 3. Update ami_id with valid AMI for your region
+# 4. Modify instance counts and types as needed
+# 5. Update default_tags with your information
+# 6. Run: terraform init
+# 7. Run: terraform plan
+# 8. Run: terraform apply
+# ======================================== 

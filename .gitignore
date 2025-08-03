@@ -1,0 +1,84 @@
+# ========================================
+# .GITIGNORE - VERSION CONTROL EXCLUSIONS
+# ========================================
+# 
+# PURPOSE:
+# This file specifies which files and directories should be excluded from
+# version control. It's critical for security, performance, and maintaining
+# a clean repository.
+# 
+# WHAT THIS FILE PROTECTS:
+# - Sensitive data (terraform.tfvars with real credentials)
+# - Terraform state files (may contain sensitive infrastructure data)
+# - Generated files (lock files, crash logs)
+# - Environment-specific configurations
+# - Local development artifacts
+# 
+# SECURITY IMPORTANCE:
+# - Prevents accidental commit of AWS credentials
+# - Protects infrastructure state information
+# - Ensures sensitive configuration stays local
+# - Maintains separation between example and actual configs
+# 
+# TERRAFORM-SPECIFIC EXCLUSIONS:
+# - *.tfstate files (contain infrastructure state and may have secrets)
+# - *.tfvars files (contain actual configuration values)
+# - .terraform/ directories (local provider downloads)
+# - crash logs and plan files
+# 
+# INCLUDED EXCEPTIONS:
+# - terraform.tfvars.example (safe to share, contains no real data)
+# 
+# BEST PRACTICES DEMONSTRATED:
+# - Security-first approach to version control
+# - Separation of example vs actual configuration
+# - Comprehensive Terraform artifact exclusion
+# - Cross-platform file exclusions (Windows, Mac, Linux)
+# ========================================
+
+# ========================================
+# TERRAFORM GITIGNORE FOR MEDIUM FOLDER
+# Excludes sensitive and generated files
+# ========================================
+
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files - contain sensitive infrastructure state
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude all .tfvars files - may contain sensitive data
+*.tfvars
+*.tfvars.json
+
+# BUT include the example file
+!terraform.tfvars.example
+
+# Ignore override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore plan files
+*tfplan*
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Lock file (optional - some teams commit this)
+.terraform.lock.hcl
+
+# OS specific files
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+*.swo
+*~ 
